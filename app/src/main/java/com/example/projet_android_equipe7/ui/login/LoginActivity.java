@@ -22,13 +22,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.example.projet_android_equipe7.R;
+import com.example.projet_android_equipe7.VolleySingleton;
+import com.example.projet_android_equipe7.modele.dao.MaRequest;
 import com.example.projet_android_equipe7.ui.login.LoginViewModel;
 import com.example.projet_android_equipe7.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private RequestQueue queue;
+    private  MaRequest request;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        loadingProgressBar.setVisibility(View.INVISIBLE);
+
+
+        //gere le singleton
+        queue = VolleySingleton.getInstance(this).getRequestQueue();
+        request = new MaRequest(this,queue);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -74,7 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
-                finish();
+
+                request.connexion(usernameEditText.getText().toString(),passwordEditText.getText().toString());
+                //finish();
             }
         });
 
