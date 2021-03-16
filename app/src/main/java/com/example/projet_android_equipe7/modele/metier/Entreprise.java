@@ -40,4 +40,16 @@ public class Entreprise {
     public String getMail() {
         return mail;
     }
+
+    @Override
+    public String toString() {
+        return "Entreprise{" +
+                "idEntreprise='" + idEntreprise + '\'' +
+                ", nom='" + nom + '\'' +
+                ", codePostal='" + codePostal + '\'' +
+                ", rue='" + rue + '\'' +
+                ", numeroTelephone='" + numeroTelephone + '\'' +
+                ", mail='" + mail + '\'' +
+                '}';
+    }
 }
