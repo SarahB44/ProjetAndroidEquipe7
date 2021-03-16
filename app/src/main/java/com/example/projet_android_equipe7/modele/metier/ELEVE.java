@@ -1,5 +1,9 @@
 package com.example.projet_android_equipe7.modele.metier;
 
+/**
+ * @author Crépilière
+ * @version 1.0
+ */
 public class Eleve {
     private String idEleve;
     private String nom;
