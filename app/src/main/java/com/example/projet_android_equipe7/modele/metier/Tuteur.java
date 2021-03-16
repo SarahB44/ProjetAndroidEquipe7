@@ -6,6 +6,7 @@ public class Tuteur {
     private String prenom;
     private String email;
     private String numeroTelephone;
+    private Entreprise entreprise;
 
     public Tuteur(String idTuteur, String nom, String prenom, String email, String numeroTelephone) {
         this.idTuteur = idTuteur;
@@ -35,6 +36,10 @@ public class Tuteur {
         return numeroTelephone;
     }
 
+    public Entreprise getEntreprise(){
+        return entreprise;
+    }
+
     @Override
     public String toString() {
         return "Tuteur{" +
@@ -43,6 +48,7 @@ public class Tuteur {
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
                 ", numeroTelephone='" + numeroTelephone + '\'' +
+                ", entreprise=" + entreprise.toString() +
                 '}';
     }
 }
