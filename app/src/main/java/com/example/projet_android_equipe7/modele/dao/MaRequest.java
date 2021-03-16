@@ -37,29 +37,38 @@ public class MaRequest {
     public void connexion(final String login, final String password, final LoginCallBack callback){
         String url = "https://www.tartie.fr/projetEquipe7/connexion.php";
 
-
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                JSONObject json =null;
 
+                //Log.d("Test récuperation de la réponse",response);
                try {
-                   json =  new JSONObject(response);
+
+                   json =  new JSONObject(response.toString());
                    String error = json.getString("error");
-                   if (error == "false"){
+
+                   if (error == "true"){
                        //créer un nouvel user
                        //
-                       String id = json.getString("id");
-                       String nom = json.getString("nom");
-                       callback.onSuccess(id,nom);
+                       //String id = json.getString("IDADMIN");
+                       //String nom = json.getString("nom");
+
+                       //callback.onSuccess(id.toString(),nom.toString());
+                       callback.onError(json.getString("message"));
 
                    } else {
-                       callback.onError(json.getString("message"));
+                       String id = json.getString("IDADMIN");
+                       String nom = json.getString("nom");
+
+                       callback.onSuccess(id.toString(),nom.toString());
+                       //callback.onError(json.getString("message"));
                    }
 
 
                } catch (JSONException e) {
-                   e.printStackTrace();
+                   //e.printStackTrace();
+                   callback.onError("Mot de passe ou identifiant incorrect.");
                }
             }
         }, new Response.ErrorListener() {

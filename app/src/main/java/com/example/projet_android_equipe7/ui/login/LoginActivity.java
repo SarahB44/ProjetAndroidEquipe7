@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Application;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
+import com.example.projet_android_equipe7.MainActivity;
 import com.example.projet_android_equipe7.R;
 import com.example.projet_android_equipe7.VolleySingleton;
 import com.example.projet_android_equipe7.modele.dao.MaRequest;
@@ -98,17 +100,22 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 request.connexion(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new MaRequest.LoginCallBack() {
+
                                     @Override
                                     public void onSuccess(String id, String nom) {
 
-                                        Log.d("test", "test");
+                                        //Log.d("test", "test");
+
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
                                         finish();
 
                                     }
 
                                     @Override
                                     public void onError(String message) {
-                                        Log.d("test", message);
+                                        Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
+                                        //Log.d("test", message);
                                     }
                                 });
                             }
@@ -162,12 +169,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
+        //String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
 }
