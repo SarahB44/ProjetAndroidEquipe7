@@ -5,14 +5,17 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Application;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -23,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.Volley;
 import com.example.projet_android_equipe7.R;
 import com.example.projet_android_equipe7.VolleySingleton;
 import com.example.projet_android_equipe7.modele.dao.MaRequest;
@@ -34,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
     private RequestQueue queue;
     private  MaRequest request;
+    private Handler handler;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         //gere le singleton
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         request = new MaRequest(this,queue);
+        handler = new Handler();
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -70,26 +77,47 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
-            @Override
-            public void onChanged(@Nullable LoginResult loginResult) {
-                if (loginResult == null) {
-                    return;
-                }
-                loadingProgressBar.setVisibility(View.GONE);
-                if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
-                }
-                if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }
-                setResult(Activity.RESULT_OK);
+                    @Override
+                    public void onChanged(@Nullable LoginResult loginResult) {
+                        if (loginResult == null) {
+                            return;
+                        }
+                        loadingProgressBar.setVisibility(View.GONE);
+                        if (loginResult.getError() != null) {
+                            showLoginFailed(loginResult.getError());
+                        }
+                        if (loginResult.getSuccess() != null) {
+                            updateUiWithUser(loginResult.getSuccess());
+                        }
+                        setResult(Activity.RESULT_OK);
 
-                //Complete and destroy login activity once successful
 
-                request.connexion(usernameEditText.getText().toString(),passwordEditText.getText().toString());
-                //finish();
-            }
-        });
+                        //Complete and destroy login activity once successful
+
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                request.connexion(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new MaRequest.LoginCallBack() {
+                                    @Override
+                                    public void onSuccess(String id, String nom) {
+
+                                        Log.d("test", "test");
+                                        finish();
+
+                                    }
+
+                                    @Override
+                                    public void onError(String message) {
+                                        Log.d("test", message);
+                                    }
+                                });
+                            }
+                        }, 1000);
+                    }
+                });
+
+
+
 
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
@@ -108,6 +136,7 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
             }
         };
+
         usernameEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.addTextChangedListener(afterTextChangedListener);
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
