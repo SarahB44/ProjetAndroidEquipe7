@@ -34,7 +34,7 @@ public class SelectionEtudiantActivity extends Activity {
 
                         //on passer les infos dans l'autre interface
                         String etudiant = lEtudiant[0];
-                            Intent i = new Intent(SelectionEtudiantActivity.this, MainActivity.class);
+                            Intent i = new Intent(SelectionEtudiantActivity.this, FormulaireVisiteStageActivity.class);
                             Toast.makeText(getApplicationContext(), etudiant, Toast.LENGTH_LONG).show();
                             i.putExtra("EXTRA_ETUDIANT", lEtudiant[0]);
                             startActivityForResult(i, 0);

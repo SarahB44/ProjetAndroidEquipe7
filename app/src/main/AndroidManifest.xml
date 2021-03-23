@@ -27,6 +27,9 @@
         <activity
             android:name=".SelectionEtudiantActivity">
         </activity>
+        <activity
+            android:name=".FormulaireVisiteStageActivity">
+        </activity>
     </application>
 
 
