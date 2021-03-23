@@ -1,9 +1,7 @@
 package com.example.projet_android_equipe7.modele.dao;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -13,12 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.projet_android_equipe7.modele.metier.Eleve;
-import com.example.projet_android_equipe7.modele.metier.Enseignant;
-import com.example.projet_android_equipe7.modele.metier.Entreprise;
-import com.example.projet_android_equipe7.modele.metier.Stage;
 import com.example.projet_android_equipe7.modele.metier.Tuteur;
-import com.example.projet_android_equipe7.modele.metier.Visite;
-import com.example.projet_android_equipe7.ui.login.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,23 +19,23 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MaRequestEleve {
+public class MaRequestTuteur {
 
     private Context context;
     private RequestQueue queue;
 
-    public MaRequestEleve(Context context, RequestQueue queue) {
+    public MaRequestTuteur(Context context, RequestQueue queue) {
         this.context = context;
         this.queue = queue;
     }
 
     /**
-     *
+     * @copie de getEleve
      * @param idEleve
      * @param callback
      */
-    public void getEleve(final String idEleve, final getEleveCallBack callback){
-        String url = "https://www.tartie.fr/projetEquipe7/getEleve.php";
+    public void getTuteur(final String idEleve, final getTuteurCallBack callback){
+        String url = "https://www.tartie.fr/projetEquipe7/getTuteur.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -52,8 +45,8 @@ public class MaRequestEleve {
                     json =  new JSONObject(response.toString());
                     String error = json.getString("error");
                     if (error.equals("false")){
-                        //créer un nouvel Eleve
-                        String id = json.getString("idEleve");
+                        //créer un nouvel Enseignant
+                        String id = json.getString("IDTUTEUR");
                         String nom = json.getString("NOM");
                         String prenom = json.getString("PRENOM");
                         String classe = json.getString("CLASSE");
@@ -95,19 +88,9 @@ public class MaRequestEleve {
         queue.add(request);
     }
 
-    public  interface getEleveCallBack{
-        void onSuccess(Eleve nouvelEleve);
-        void onError(String message);
-    }
 
-
-    public interface getStageCallBack{
-        void onSuccess(Stage nouveauStage);
-        void onError(String message);
-    }
-
-    public interface getVisite{
-        void onSuccess(Visite nouvelVisite);
+    public interface getTuteurCallBack{
+        void onSuccess(Tuteur nouveauTuteur);
         void onError(String message);
     }
 }
