@@ -30,6 +30,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.Volley;
 import com.example.projet_android_equipe7.MainActivity;
+import com.example.projet_android_equipe7.SelectionEtudiantActivity;
 import com.example.projet_android_equipe7.R;
 import com.example.projet_android_equipe7.VolleySingleton;
 import com.example.projet_android_equipe7.modele.dao.MaRequest;
@@ -106,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         //Log.d("test", "test");
 
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), SelectionEtudiantActivity.class);
                                         startActivity(intent);
                                         finish();
 
