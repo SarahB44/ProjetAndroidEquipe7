@@ -1,8 +1,6 @@
 package com.example.projet_android_equipe7.modele.dao;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -11,7 +9,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.projet_android_equipe7.ui.login.LoginActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,12 +16,12 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MaRequest {
+public class Requestconnexion {
 
     private Context context;
     private RequestQueue queue;
 
-    public MaRequest(Context context, RequestQueue queue) {
+    public Requestconnexion(Context context, RequestQueue queue) {
         this.context = context;
         this.queue = queue;
     }
@@ -40,36 +37,36 @@ public class MaRequest {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-               JSONObject json =null;
+                JSONObject json =null;
 
                 //Log.d("Test récuperation de la réponse",response);
-               try {
+                try {
 
-                   json =  new JSONObject(response.toString());
-                   String error = json.getString("error");
+                    json =  new JSONObject(response.toString());
+                    String error = json.getString("error");
 
-                   if (error == "true"){
-                       //créer un nouvel user
-                       //
-                       //String id = json.getString("IDADMIN");
-                       //String nom = json.getString("nom");
+                    if (error == "true"){
+                        //créer un nouvel user
+                        //
+                        //String id = json.getString("IDADMIN");
+                        //String nom = json.getString("nom");
 
-                       //callback.onSuccess(id.toString(),nom.toString());
-                       callback.onError(json.getString("message"));
+                        //callback.onSuccess(id.toString(),nom.toString());
+                        callback.onError(json.getString("message"));
 
-                   } else {
-                       String id = json.getString("IDADMIN");
-                       String nom = json.getString("nom");
+                    } else {
+                        String id = json.getString("IDADMIN");
+                        String nom = json.getString("nom");
 
-                       callback.onSuccess(id.toString(),nom.toString());
-                       //callback.onError(json.getString("message"));
-                   }
+                        callback.onSuccess(id.toString(),nom.toString());
+                        //callback.onError(json.getString("message"));
+                    }
 
 
-               } catch (JSONException e) {
-                   //e.printStackTrace();
-                   callback.onError("Mot de passe ou identifiant incorrect.");
-               }
+                } catch (JSONException e) {
+                    //e.printStackTrace();
+                    callback.onError("Mot de passe ou identifiant incorrect.");
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -102,4 +99,5 @@ public class MaRequest {
         void onSuccess(String id, String nom);
         void onError(String message);
     }
+
 }

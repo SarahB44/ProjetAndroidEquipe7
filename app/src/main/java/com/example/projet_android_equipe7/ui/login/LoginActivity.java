@@ -1,22 +1,11 @@
 package com.example.projet_android_equipe7.ui.login;
 
 import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,22 +15,26 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.Volley;
 import com.example.projet_android_equipe7.MainActivity;
-import com.example.projet_android_equipe7.SelectionEtudiantActivity;
 import com.example.projet_android_equipe7.R;
 import com.example.projet_android_equipe7.VolleySingleton;
-import com.example.projet_android_equipe7.modele.dao.MaRequest;
-import com.example.projet_android_equipe7.ui.login.LoginViewModel;
-import com.example.projet_android_equipe7.ui.login.LoginViewModelFactory;
+import com.example.projet_android_equipe7.modele.dao.MaRequestTuteur;
+import com.example.projet_android_equipe7.modele.dao.Requestconnexion;
+import com.example.projet_android_equipe7.modele.metier.Eleve;
+import com.example.projet_android_equipe7.modele.metier.Tuteur;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private RequestQueue queue;
-    private  MaRequest request;
+    private Requestconnexion request;
     private Handler handler;
 
     @Override
@@ -60,8 +53,24 @@ public class LoginActivity extends AppCompatActivity {
 
         //gere le singleton
         queue = VolleySingleton.getInstance(this).getRequestQueue();
-        request = new MaRequest(this,queue);
+        request = new Requestconnexion(this,queue);
         handler = new Handler();
+
+
+        MaRequestTuteur test = new MaRequestTuteur(this,queue);
+        MaRequestTuteur.getTuteur("1",new MaRequestTuteur.getTuteurCallBack() {
+
+            @Override
+            public void onSuccess(Tuteur nouveauTuteur) {
+                Toast.makeText(getBaseContext(),nouveauTuteur.toString(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(String message) {
+                Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -93,30 +102,23 @@ public class LoginActivity extends AppCompatActivity {
                             updateUiWithUser(loginResult.getSuccess());
                         }
                         setResult(Activity.RESULT_OK);
-
-
                         //Complete and destroy login activity once successful
 
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                request.connexion(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new MaRequest.LoginCallBack() {
+                                request.connexion(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new Requestconnexion.LoginCallBack() {
 
                                     @Override
                                     public void onSuccess(String id, String nom) {
-
-                                        //Log.d("test", "test");
-
-                                        Intent intent = new Intent(getApplicationContext(), SelectionEtudiantActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                         finish();
-
                                     }
 
                                     @Override
                                     public void onError(String message) {
                                         Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
-                                        //Log.d("test", message);
                                     }
                                 });
                             }
