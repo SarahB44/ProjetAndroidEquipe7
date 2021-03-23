@@ -22,8 +22,8 @@ import java.util.Map;
 
 public class MaRequestTuteur {
 
-    private Context context;
-    private RequestQueue queue;
+    private static Context context;
+    private static RequestQueue queue;
 
     public MaRequestTuteur(Context context, RequestQueue queue) {
         this.context = context;
@@ -35,7 +35,7 @@ public class MaRequestTuteur {
      * @param idTuteur
      * @param callback
      */
-    public void getTuteur(final String idTuteur, final getTuteurCallBack callback){
+    public static void getTuteur(final String idTuteur, final getTuteurCallBack callback){
         String url = "https://www.tartie.fr/projetEquipe7/getTuteur.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

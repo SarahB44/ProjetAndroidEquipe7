@@ -25,8 +25,10 @@ import com.android.volley.RequestQueue;
 import com.example.projet_android_equipe7.MainActivity;
 import com.example.projet_android_equipe7.R;
 import com.example.projet_android_equipe7.VolleySingleton;
+import com.example.projet_android_equipe7.modele.dao.MaRequestTuteur;
 import com.example.projet_android_equipe7.modele.dao.Requestconnexion;
 import com.example.projet_android_equipe7.modele.metier.Eleve;
+import com.example.projet_android_equipe7.modele.metier.Tuteur;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,11 +56,13 @@ public class LoginActivity extends AppCompatActivity {
         request = new Requestconnexion(this,queue);
         handler = new Handler();
 
-        /*
-        request.getEleve("3",new MaRequest.getEleveCallBack() {
+
+        MaRequestTuteur test = new MaRequestTuteur(this,queue);
+        MaRequestTuteur.getTuteur("1",new MaRequestTuteur.getTuteurCallBack() {
+
             @Override
-            public void onSuccess(Eleve nouvelEleve) {
-                Toast.makeText(getBaseContext(),nouvelEleve.toString(),Toast.LENGTH_LONG).show();
+            public void onSuccess(Tuteur nouveauTuteur) {
+                Toast.makeText(getBaseContext(),nouveauTuteur.toString(),Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -66,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
             }
         });
-         */
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
