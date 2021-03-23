@@ -12,7 +12,7 @@ public class Tuteur {
     private String numeroTelephone;
     private Entreprise entreprise;
 
-    public Tuteur(String idTuteur, String nom, String prenom, String email, String numeroTelephone) {
+    public Tuteur(String idTuteur, String nom, String prenom, String email, String numeroTelephone,Entreprise entreprise) {
         this.idTuteur = idTuteur;
         this.nom = nom;
         this.prenom = prenom;

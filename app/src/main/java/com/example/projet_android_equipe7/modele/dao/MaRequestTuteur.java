@@ -11,6 +11,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.projet_android_equipe7.modele.metier.Eleve;
+import com.example.projet_android_equipe7.modele.metier.Entreprise;
 import com.example.projet_android_equipe7.modele.metier.Tuteur;
 
 import org.json.JSONException;
@@ -31,10 +32,10 @@ public class MaRequestTuteur {
 
     /**
      * @copie de getEleve
-     * @param idEleve
+     * @param idTuteur
      * @param callback
      */
-    public void getTuteur(final String idEleve, final getTuteurCallBack callback){
+    public void getTuteur(final String idTuteur, final getTuteurCallBack callback){
         String url = "https://www.tartie.fr/projetEquipe7/getTuteur.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -45,17 +46,28 @@ public class MaRequestTuteur {
                     json =  new JSONObject(response.toString());
                     String error = json.getString("error");
                     if (error.equals("false")){
-                        //créer un nouvel Enseignant
-                        String id = json.getString("IDTUTEUR");
-                        String nom = json.getString("NOM");
-                        String prenom = json.getString("PRENOM");
-                        String classe = json.getString("CLASSE");
-                        String NUMEROTELEPHONE = json.getString("NUMEROTELEPHONE");
-                        String ANNEE = json.getString("ANNEE");
-                        Log.d("test apres recuperation des données", ANNEE.toString());
-                        Eleve nouvelEleve = new Eleve(id,nom,prenom,classe,NUMEROTELEPHONE,ANNEE);
+                        //créer un nouveau Tuteur
+                        final String id = json.getString("IDTUTEUR");
+                        String idEntreprise = json.getString("IDENTREPRISE");
+                        final String nom = json.getString("NOM");
+                        final String prenom = json.getString("PRENOM");
+                        final String email = json.getString("EMAIL");
+                        final String numerotelephone = json.getString("NUMEROTELEPHONE");
 
-                        callback.onSuccess(nouvelEleve);
+                        MaRequestEntreprise request = new MaRequestEntreprise(context,queue);
+                        request.getEntreprise(idEntreprise,new MaRequestEntreprise.getEntrepriseCallBack() {
+                            @Override
+                            public void onSuccess(Entreprise nouvelEntreprise) {
+                                //assigne l'entreprise au tuteur
+                                Tuteur nouveauTuteur = new Tuteur(id,nom,prenom,email,numerotelephone,nouvelEntreprise);
+                                callback.onSuccess(nouveauTuteur);
+                            }
+
+                            @Override
+                            public void onError(String message) {
+                                callback.onError(message);
+                            }
+                        });
                     } else {
                         callback.onError(json.getString("message"));
                     }
@@ -77,7 +89,7 @@ public class MaRequestTuteur {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("IDELEVE",idEleve);
+                map.put("IDTUTEUR",idTuteur);
                 map.put("error","false");
                 map.put("message","message");
                 return map;

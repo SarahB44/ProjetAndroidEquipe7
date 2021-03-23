@@ -29,11 +29,11 @@ public class MaRequestEntreprise {
     }
 
     /**
-     *
+     * @copie de getEleve
      * @param idEntreprise
      * @param callback
      */
-    public void getEleve(final String idEntreprise, final getEntrepriseCallBack callback){
+    public void getEntreprise(final String idEntreprise, final getEntrepriseCallBack callback){
         String url = "https://www.tartie.fr/projetEquipe7/getEntreprise.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
