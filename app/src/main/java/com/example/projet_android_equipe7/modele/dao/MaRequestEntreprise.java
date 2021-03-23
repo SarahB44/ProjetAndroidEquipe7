@@ -33,7 +33,7 @@ public class MaRequestEntreprise {
      * @param idEntreprise
      * @param callback
      */
-    public void getEleve(final String idEntreprise, final MaRequestEleve.getEleveCallBack callback){
+    public void getEleve(final String idEntreprise, final getEntrepriseCallBack callback){
         String url = "https://www.tartie.fr/projetEquipe7/getEntreprise.php";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -55,7 +55,7 @@ public class MaRequestEntreprise {
 
                         Entreprise nouvelEntreprise = new Entreprise(id,nom, codePostal, ville, rue, numerotelephone,mail);
 
-                        callback.onSuccess(nouvelEleve);
+                        callback.onSuccess(nouvelEntreprise);
                     } else {
                         callback.onError(json.getString("message"));
                     }
@@ -77,7 +77,7 @@ public class MaRequestEntreprise {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("IDELEVE",idEleve);
+                map.put("IDENTREPRISE",idEntreprise);
                 map.put("error","false");
                 map.put("message","message");
                 return map;
