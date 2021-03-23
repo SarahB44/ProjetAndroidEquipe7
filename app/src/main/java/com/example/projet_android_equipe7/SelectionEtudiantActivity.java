@@ -23,7 +23,7 @@ public class SelectionEtudiantActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_formulaire_visite);
+        setContentView(R.layout.activity_selection_etudiant);
 
         Button buttonAfficherVisiteStage = findViewById(R.id.buttonAfficherVisiteStage);
         //on place un écouteur dessus:
