@@ -1,22 +1,11 @@
 package com.example.projet_android_equipe7.ui.login;
 
 import android.app.Activity;
-
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
-
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,15 +15,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.Volley;
 import com.example.projet_android_equipe7.MainActivity;
 import com.example.projet_android_equipe7.R;
 import com.example.projet_android_equipe7.VolleySingleton;
 import com.example.projet_android_equipe7.modele.dao.MaRequest;
-import com.example.projet_android_equipe7.ui.login.LoginViewModel;
-import com.example.projet_android_equipe7.ui.login.LoginViewModelFactory;
+import com.example.projet_android_equipe7.modele.metier.Eleve;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -61,6 +53,18 @@ public class LoginActivity extends AppCompatActivity {
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         request = new MaRequest(this,queue);
         handler = new Handler();
+
+        request.getEleve("1",new MaRequest.getEleveCallBack() {
+            @Override
+            public void onSuccess(Eleve nouvelEleve) {
+                Toast.makeText(getBaseContext(),nouvelEleve.toString(),Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(String message) {
+                Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
+            }
+        });
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -103,19 +107,14 @@ public class LoginActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onSuccess(String id, String nom) {
-
-                                        //Log.d("test", "test");
-
                                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                         finish();
-
                                     }
 
                                     @Override
                                     public void onError(String message) {
                                         Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
-                                        //Log.d("test", message);
                                     }
                                 });
                             }
