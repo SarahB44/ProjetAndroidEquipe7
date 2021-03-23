@@ -50,11 +50,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //gere le singleton
+        /*
         queue = VolleySingleton.getInstance(this).getRequestQueue();
         request = new MaRequest(this,queue);
         handler = new Handler();
 
-        request.getEleve("1",new MaRequest.getEleveCallBack() {
+        request.getEleve("3",new MaRequest.getEleveCallBack() {
             @Override
             public void onSuccess(Eleve nouvelEleve) {
                 Toast.makeText(getBaseContext(),nouvelEleve.toString(),Toast.LENGTH_LONG).show();
@@ -65,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
             }
         });
+         */
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override

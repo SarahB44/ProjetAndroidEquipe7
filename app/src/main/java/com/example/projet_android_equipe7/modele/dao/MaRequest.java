@@ -3,6 +3,7 @@ package com.example.projet_android_equipe7.modele.dao;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -24,7 +25,6 @@ public class MaRequest {
 
     private Context context;
     private RequestQueue queue;
-    //test
 
     public MaRequest(Context context, RequestQueue queue) {
         this.context = context;
@@ -114,29 +114,25 @@ public class MaRequest {
                 JSONObject json =null;
                 try {
                     json =  new JSONObject(response.toString());
-
-                    Log.d("json",json.toString());
-
                     String error = json.getString("error");
                     if (error.equals("false")){
                         //créer un nouvel Eleve
-                        Log.d("r",json.toString());
                         String id = json.getString("idEleve");
-                        String nom = json.getString("nom");
-                        String prenom = json.getString("prenom");
+                        String nom = json.getString("NOM");
+                        String prenom = json.getString("PRENOM");
                         String classe = json.getString("CLASSE");
-                        //String NUMEROTELEPHONE = json.getString("NUMEROTELEPHONE");
+                        String NUMEROTELEPHONE = json.getString("NUMEROTELEPHONE");
                         String ANNEE = json.getString("ANNEE");
+                        Log.d("test apres recuperation des données", ANNEE.toString());
+                        Eleve nouvelEleve = new Eleve(id,nom,prenom,classe,NUMEROTELEPHONE,ANNEE);
 
-                        //Eleve nouvelEleve = new Eleve(id,nom,prenom,classe,NUMEROTELEPHONE,ANNEE);
-
-                        //callback.onSuccess(nouvelEleve);
+                        callback.onSuccess(nouvelEleve);
                     } else {
                         callback.onError(json.getString("message"));
                     }
                 } catch (JSONException e) {
                     //e.printStackTrace();
-                    Log.d("test", e.toString());
+                    Log.d("rapport d'erreur", e.toString());
                     callback.onError(response.toString());
                 }
             }
