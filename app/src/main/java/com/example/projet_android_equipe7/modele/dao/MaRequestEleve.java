@@ -13,6 +13,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.projet_android_equipe7.modele.metier.Eleve;
+import com.example.projet_android_equipe7.modele.metier.Enseignant;
+import com.example.projet_android_equipe7.modele.metier.Entreprise;
+import com.example.projet_android_equipe7.modele.metier.Stage;
+import com.example.projet_android_equipe7.modele.metier.Tuteur;
+import com.example.projet_android_equipe7.modele.metier.Visite;
 import com.example.projet_android_equipe7.ui.login.LoginActivity;
 
 import org.json.JSONException;
@@ -21,83 +26,14 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MaRequest {
+public class MaRequestEleve {
 
     private Context context;
     private RequestQueue queue;
 
-    public MaRequest(Context context, RequestQueue queue) {
+    public MaRequestEleve(Context context, RequestQueue queue) {
         this.context = context;
         this.queue = queue;
-    }
-
-    /**
-     *
-     * @param login
-     * @param password
-     */
-    public void connexion(final String login, final String password, final LoginCallBack callback){
-        String url = "https://www.tartie.fr/projetEquipe7/connexion.php";
-
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-               JSONObject json =null;
-
-                //Log.d("Test récuperation de la réponse",response);
-               try {
-
-                   json =  new JSONObject(response.toString());
-                   String error = json.getString("error");
-
-                   if (error == "true"){
-                       //créer un nouvel user
-                       //
-                       //String id = json.getString("IDADMIN");
-                       //String nom = json.getString("nom");
-
-                       //callback.onSuccess(id.toString(),nom.toString());
-                       callback.onError(json.getString("message"));
-
-                   } else {
-                       String id = json.getString("IDADMIN");
-                       String nom = json.getString("nom");
-
-                       callback.onSuccess(id.toString(),nom.toString());
-                       //callback.onError(json.getString("message"));
-                   }
-
-
-               } catch (JSONException e) {
-                   //e.printStackTrace();
-                   callback.onError("Mot de passe ou identifiant incorrect.");
-               }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if(error instanceof NetworkError){
-                    callback.onError("impossible de se connecter");
-                } else if(error instanceof VolleyError){
-                    callback.onError("Une erreur s'est produite");
-                }
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-
-                Map<String,String> map = new HashMap<>();
-                map.put("login",login);
-                map.put("password",password);
-                map.put("error","false");
-                map.put("message","message");
-                return map;
-
-            }
-
-        };
-
-        queue.add(request);
     }
 
     /**
@@ -132,7 +68,6 @@ public class MaRequest {
                     }
                 } catch (JSONException e) {
                     //e.printStackTrace();
-                    Log.d("rapport d'erreur", e.toString());
                     callback.onError(response.toString());
                 }
             }
@@ -148,14 +83,11 @@ public class MaRequest {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Log.d("test","test");
-
                 Map<String,String> map = new HashMap<>();
                 map.put("IDELEVE",idEleve);
                 map.put("error","false");
                 map.put("message","message");
                 return map;
-
             }
 
         };
@@ -163,13 +95,91 @@ public class MaRequest {
         queue.add(request);
     }
 
-    public interface LoginCallBack{
-        void onSuccess(String id, String nom);
+    /**
+     * @copie de getEleve
+     * @param idEnseignant
+     * @param callback
+     */
+    public void getEnseignant(final String idEnseignant, final getEnseignantCallBack callback){
+        String url = "https://www.tartie.fr/projetEquipe7/getEnseignant.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject json =null;
+                try {
+                    json =  new JSONObject(response.toString());
+                    String error = json.getString("error");
+                    if (error.equals("false")){
+                        //créer un nouvel Eleve
+                        String id = json.getString("IDENSEIGNANT");
+                        String nom = json.getString("NOM");
+                        String prenom = json.getString("PRENOM");
+                        String NUMEROTELEPHONE = json.getString("NUMEROTELEPHONE");
+                        String MAIL = json.getString("MAIL");
+                        Enseignant nouvelEnseignant = new Enseignant(id,nom,prenom,NUMEROTELEPHONE,MAIL);
+
+                        callback.onSuccess(nouvelEnseignant);
+                    } else {
+                        callback.onError(json.getString("message"));
+                    }
+                } catch (JSONException e) {
+                    callback.onError(response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(error instanceof NetworkError){
+                    callback.onError("impossible de se connecter");
+                } else if(error instanceof VolleyError){
+                    callback.onError("Une erreur s'est produite");
+                }
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put("IDENSEIGNANT",idEnseignant);
+                map.put("error","false");
+                map.put("message","message");
+                return map;
+            }
+        };
+        queue.add(request);
+    }
+
+
+
+
+
+    public  interface getEleveCallBack{
+        void onSuccess(Eleve nouvelEleve);
         void onError(String message);
     }
 
-    public  interface  getEleveCallBack{
-        void onSuccess(Eleve nouvelEleve);
+    public  interface getEnseignantCallBack{
+        void onSuccess(Enseignant nouvelEnseignant);
+        void onError(String message);
+    }
+
+    public interface getEntrepriseCallBack{
+        void onSuccess(Entreprise nouvelEntreprise);
+        void onError(String message);
+    }
+
+    public interface getStageCallBack{
+        void onSuccess(Stage nouveauStage);
+        void onError(String message);
+    }
+
+    public interface getTuteur{
+        void onSuccess(Tuteur nouveauTuteur);
+        void onError(String message);
+    }
+
+    public interface getVisite{
+        void onSuccess(Visite nouvelVisite);
         void onError(String message);
     }
 }

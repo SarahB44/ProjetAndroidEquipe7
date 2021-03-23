@@ -25,14 +25,14 @@ import com.android.volley.RequestQueue;
 import com.example.projet_android_equipe7.MainActivity;
 import com.example.projet_android_equipe7.R;
 import com.example.projet_android_equipe7.VolleySingleton;
-import com.example.projet_android_equipe7.modele.dao.MaRequest;
+import com.example.projet_android_equipe7.modele.dao.Requestconnexion;
 import com.example.projet_android_equipe7.modele.metier.Eleve;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private RequestQueue queue;
-    private  MaRequest request;
+    private Requestconnexion request;
     private Handler handler;
 
     @Override
@@ -50,11 +50,11 @@ public class LoginActivity extends AppCompatActivity {
 
 
         //gere le singleton
-        /*
         queue = VolleySingleton.getInstance(this).getRequestQueue();
-        request = new MaRequest(this,queue);
+        request = new Requestconnexion(this,queue);
         handler = new Handler();
 
+        /*
         request.getEleve("3",new MaRequest.getEleveCallBack() {
             @Override
             public void onSuccess(Eleve nouvelEleve) {
@@ -98,14 +98,12 @@ public class LoginActivity extends AppCompatActivity {
                             updateUiWithUser(loginResult.getSuccess());
                         }
                         setResult(Activity.RESULT_OK);
-
-
                         //Complete and destroy login activity once successful
-
+                        
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                request.connexion(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new MaRequest.LoginCallBack() {
+                                request.connexion(usernameEditText.getText().toString(), passwordEditText.getText().toString(), new Requestconnexion.LoginCallBack() {
 
                                     @Override
                                     public void onSuccess(String id, String nom) {
