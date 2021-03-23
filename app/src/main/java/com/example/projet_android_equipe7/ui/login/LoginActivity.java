@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         setResult(Activity.RESULT_OK);
                         //Complete and destroy login activity once successful
-                        
+
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
