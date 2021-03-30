@@ -266,12 +266,14 @@
                                     android:text="Date du début : " />
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName2"
-                                    style="@style/EcritureParties"
+                                    android:id="@+id/dateDebut"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:inputType="textPersonName" />
+                                    android:clickable="true"
+                                    android:editable="false"
+                                    android:text="01/01/2021"
+                                    style="@style/EcritureParties" />
+
                             </LinearLayout>
 
                             <LinearLayout
@@ -289,30 +291,31 @@
                                     android:text="Date de fin : " />
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName3"
-                                    style="@style/EcritureParties"
+                                    android:id="@+id/dateFin"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:inputType="textPersonName" />
+                                    android:clickable="true"
+                                    android:editable="false"
+                                    android:text="01/01/2021"
+                                    style="@style/EcritureParties" />
                             </LinearLayout>
 
-                            <View
-                                android:id="@+id/divider5"
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:layout_weight="1"
-                                android:background="#EE9A49"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp"/>
+
 
 
 
                         </LinearLayout>
-
-                        <Space
+                        <View
+                            android:id="@+id/divider5"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="2dp"
+                            android:layout_weight="1"
+                            android:background="#EE9A49"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"/>
+                        <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"></Space>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -344,13 +347,14 @@
                                     style="@style/EcritureParties" />
 
                                 <EditText
-                                    android:id="@+id/editTextTextPersonName4"
+                                    android:id="@+id/dateVisite"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:ems="10"
-                                    android:inputType="textPersonName"
+                                    android:clickable="true"
+                                    android:editable="false"
+                                    android:text="01/01/2021"
                                     style="@style/EcritureParties" />
+
                             </LinearLayout>
 
                             <TextView
@@ -413,6 +417,7 @@
                                 android:gravity="top"
                                 android:inputType="text|textMultiLine"
                                 android:paddingBottom="15dp"
+                                android:layout_marginBottom="15dp"
                                 style="@style/EcritureParties"/>
 
                             <View
