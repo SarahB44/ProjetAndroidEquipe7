@@ -6,8 +6,7 @@
     <color name="ColorFondButton">#5883A4 </color>
     <color name="ColorTextButton">#FFFFFF</color>
     <color name="colorOrange">#EE9A49</color>
-    <color name="colorText">#0B2889</color>
+    <color name="colorText">#F3F3F3</color>
     <color name="whiteBackground">#F3F3F3</color>
     <color name="greyBackground">#4E4E4E</color>
-    <color name="colorTextRempli">#7B7A7A</color>
 </resources>

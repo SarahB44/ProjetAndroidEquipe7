@@ -9,7 +9,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -69,9 +71,19 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:paddingBottom="15dp"
                                 android:text="qssqdqsdsq"
                                 style="@style/EcritureParties"
                                 />
+
+                            <View
+                                android:id="@+id/divider"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_weight="1"
+                                android:background="#EE9A49"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"/>
 
                         </LinearLayout>
 
@@ -99,8 +111,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="gsdfghdsfgsdfgsd"
+                                android:paddingBottom="15dp"
                                 style="@style/EcritureParties"
                                 />
+
+                            <View
+                                android:id="@+id/divider2"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_weight="1"
+                                android:background="#EE9A49"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"/>
+
+
                         </LinearLayout>
                         <Space
                             android:layout_width="match_parent"
@@ -127,7 +151,20 @@
                                 android:layout_weight="1"
                                 android:text="gsdfghdsfgsdfgsd"
                                 style="@style/EcritureParties"
+                                android:paddingBottom="15dp"
                                 />
+
+
+                            <View
+                                android:id="@+id/divider3"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_weight="1"
+                                android:background="#EE9A49"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"/>
+
+
                         </LinearLayout>
                         <Space
                             android:layout_width="match_parent"
@@ -154,7 +191,19 @@
                                 android:layout_weight="1"
                                 android:text="gsdfghdsfgsdfgsd"
                                 style="@style/EcritureParties"
+                                android:paddingBottom="15dp"
                                 />
+
+                            <View
+                                android:id="@+id/divider4"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_weight="1"
+                                android:background="#EE9A49"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"/>
+
+
                         </LinearLayout>
 
                         <Space
