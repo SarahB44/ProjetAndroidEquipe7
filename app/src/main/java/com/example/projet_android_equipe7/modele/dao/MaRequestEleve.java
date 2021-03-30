@@ -1,9 +1,7 @@
 package com.example.projet_android_equipe7.modele.dao;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkError;
@@ -13,16 +11,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.projet_android_equipe7.modele.metier.Eleve;
-import com.example.projet_android_equipe7.modele.metier.Enseignant;
-import com.example.projet_android_equipe7.modele.metier.Entreprise;
-import com.example.projet_android_equipe7.modele.metier.Stage;
-import com.example.projet_android_equipe7.modele.metier.Tuteur;
-import com.example.projet_android_equipe7.modele.metier.Visite;
-import com.example.projet_android_equipe7.ui.login.LoginActivity;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,19 +90,71 @@ public class MaRequestEleve {
         queue.add(request);
     }
 
-    public  interface getEleveCallBack{
-        void onSuccess(Eleve nouvelEleve);
-        void onError(String message);
+    public void getAllElevefinal(final getEleveCallBack callback){
+        String url = "https://www.tartie.fr/projetEquipe7/getAllEleve.php";
+
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject json =null;
+                JSONObject eleveJson = null;
+
+                try {
+                    ArrayList<Eleve> Eleves = new ArrayList<Eleve>();  //crée une nouvelle ArrayList vide pour les éléves les éléves
+                    json = new JSONObject(response); //initialise l'objet json a partir de la reponse
+
+                    String error = json.getString("error");
+                    if (error.equals("false")){
+                        int rowCount = Integer.valueOf(json.getString("rowCount"));
+                        for (int i = 0;i < rowCount;i++){
+
+                            eleveJson = new JSONObject(json.getString(String.valueOf(i)));
+
+                            //crée un nouvel eleve basé sur le row recuperé
+                            String id = eleveJson.getString("IDELEVE");
+                            String nom = eleveJson.getString("NOM");
+                            String prenom = eleveJson.getString("PRENOM");
+                            String classe = eleveJson.getString("CLASSE");
+                            String NUMEROTELEPHONE = eleveJson.getString("NUMEROTELEPHONE");
+                            String ANNEE = eleveJson.getString("ANNEE");
+                            Eleve nouvelEleve = new Eleve(id,nom,prenom,classe,NUMEROTELEPHONE,ANNEE);
+                            Eleves.add(nouvelEleve); //ajoute l'eleve dans la ArrayList
+                        }
+                        callback.onSuccess(Eleves);
+                    } else {
+                        callback.onError(json.getString("erreur"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onError(response.toString());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if(error instanceof NetworkError){
+                    callback.onError("impossible de se connecter");
+                } else if(error instanceof VolleyError){
+                    callback.onError("Une erreur s'est produite");
+                }
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put("error","false");
+                map.put("message","message");
+                return map;
+            }
+
+        };
+
+        queue.add(request);
     }
 
-
-    public interface getStageCallBack{
-        void onSuccess(Stage nouveauStage);
-        void onError(String message);
-    }
-
-    public interface getVisite{
-        void onSuccess(Visite nouvelVisite);
+    public interface getEleveCallBack{
+        void onSuccess(ArrayList<Eleve> eleves);
+        void onSuccess(Eleve eleve);
         void onError(String message);
     }
 }

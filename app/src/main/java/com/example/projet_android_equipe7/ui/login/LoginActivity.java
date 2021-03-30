@@ -24,6 +24,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.android.volley.RequestQueue;
 import com.example.projet_android_equipe7.MainActivity;
 import com.example.projet_android_equipe7.R;
+import com.example.projet_android_equipe7.SelectionEtudiantActivity;
 import com.example.projet_android_equipe7.VolleySingleton;
 import com.example.projet_android_equipe7.modele.dao.MaRequestTuteur;
 import com.example.projet_android_equipe7.modele.dao.Requestconnexion;
@@ -56,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         request = new Requestconnexion(this,queue);
         handler = new Handler();
 
-
+    /*
         MaRequestTuteur test = new MaRequestTuteur(this,queue);
         MaRequestTuteur.getTuteur("1",new MaRequestTuteur.getTuteurCallBack() {
 
@@ -70,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
             }
         });
+        */
+
 
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -111,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onSuccess(String id, String nom) {
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), SelectionEtudiantActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
