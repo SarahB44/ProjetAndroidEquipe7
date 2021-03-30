@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -39,10 +38,10 @@
 
                         <TextView
                             android:id="@+id/textView"
+                            style="@style/Titre"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="AJOUT VISITE DE STAGE"
-                            style="@style/Titre"/>
+                            android:text="AJOUT VISITE DE STAGE" />
 
                         <Space
                             android:layout_width="match_parent"
@@ -55,29 +54,27 @@
                             android:visibility="visible">
 
 
-                                <TextView
-                                    android:id="@+id/textView2"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="ETUDIANT"
-                                    style="@style/EcritureParties"
-                                    />
-
                             <TextView
-                                android:id="@+id/textView3"
+                                android:id="@+id/textView2"
+                                style="@style/EcritureParties"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="qssqdqsdsq"
+                                android:text="ETUDIANT" />
+
+                            <TextView
+                                android:id="@+id/textView3"
                                 style="@style/EcritureParties"
-                                />
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="qssqdqsdsq" />
 
                         </LinearLayout>
 
                         <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp" />
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -86,22 +83,21 @@
 
                             <TextView
                                 android:id="@+id/textView4"
+                                style="@style/EcritureParties"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="ENSEIGNANT"
-                                style="@style/EcritureParties"
-                                />
+                                android:text="ENSEIGNANT" />
 
                             <TextView
                                 android:id="@+id/textView5"
+                                style="@style/EcritureParties"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="gsdfghdsfgsdfgsd"
-                                style="@style/EcritureParties"
-                                />
+                                android:text="gsdfghdsfgsdfgsd" />
                         </LinearLayout>
+
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="40dp" />
@@ -113,22 +109,21 @@
 
                             <TextView
                                 android:id="@+id/textView6"
+                                style="@style/EcritureParties"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="ENTREPRISE"
-                                style="@style/EcritureParties"
-                                />
+                                android:text="ENTREPRISE" />
 
                             <TextView
                                 android:id="@+id/textView7"
+                                style="@style/EcritureParties"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="gsdfghdsfgsdfgsd"
-                                style="@style/EcritureParties"
-                                />
+                                android:text="gsdfghdsfgsdfgsd" />
                         </LinearLayout>
+
                         <Space
                             android:layout_width="match_parent"
                             android:layout_height="40dp" />
@@ -140,21 +135,19 @@
 
                             <TextView
                                 android:id="@+id/textView8"
+                                style="@style/EcritureParties"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="TUTEUR"
-                                style="@style/EcritureParties"
-                                />
+                                android:text="TUTEUR" />
 
                             <TextView
                                 android:id="@+id/textView9"
+                                style="@style/EcritureParties"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="gsdfghdsfgsdfgsd"
-                                style="@style/EcritureParties"
-                                />
+                                android:text="gsdfghdsfgsdfgsd" />
                         </LinearLayout>
 
                         <Space
@@ -162,18 +155,17 @@
                             android:layout_height="40dp" />
 
                         <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
 
-                                <TextView
-                                    android:id="@+id/textView10"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:text="STAGE"
-                                    style="@style/EcritureParties"
-                                    />
+                            <TextView
+                                android:id="@+id/textView10"
+                                style="@style/EcritureParties"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="STAGE" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -183,20 +175,19 @@
 
                                 <TextView
                                     android:id="@+id/textView11"
+                                    style="@style/EcritureParties"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Intitulé du Stage :"
-                                    style="@style/EcritureParties"
-                                    />
+                                    android:text="Intitulé du Stage :" />
 
                                 <EditText
                                     android:id="@+id/editTextTextPersonName"
+                                    style="@style/EcritureParties"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:inputType="textPersonName"
-                                    style="@style/EcritureParties"/>
+                                    android:inputType="textPersonName" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -207,21 +198,19 @@
 
                                 <TextView
                                     android:id="@+id/textView12"
+                                    style="@style/EcritureParties"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Date du début : "
-                                    style="@style/EcritureParties"
-                                    />
+                                    android:text="Date du début : " />
 
                                 <EditText
                                     android:id="@+id/editTextTextPersonName2"
+                                    style="@style/EcritureParties"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:inputType="textPersonName"
-                                    style="@style/EcritureParties"
-                                     />
+                                    android:inputType="textPersonName" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -232,21 +221,199 @@
 
                                 <TextView
                                     android:id="@+id/textView13"
+                                    style="@style/EcritureParties"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Date de fin : "
-                                    style="@style/EcritureParties"
-                                    />
+                                    android:text="Date de fin : " />
 
                                 <EditText
                                     android:id="@+id/editTextTextPersonName3"
+                                    style="@style/EcritureParties"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:inputType="textPersonName"
-                                    style="@style/EcritureParties"
-                                    />
+                                    android:inputType="textPersonName" />
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <Space
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textViewVisite"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="VISITE" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+
+
+                                <TextView
+                                    android:id="@+id/textView14"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Date : " />
+
+                                <EditText
+                                    android:id="@+id/editTextTextPersonName4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:ems="10"
+                                    android:inputType="textPersonName" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textView15"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Conditions du stage : " />
+
+                            <EditText
+                                android:id="@+id/edit_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:gravity="top"
+                                android:inputType="text|textMultiLine" />
+
+                            <TextView
+                                android:id="@+id/textView16"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Bilan des travaux réalisés" />
+
+
+                            <EditText
+                                android:id="@+id/edit_text2"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:gravity="top"
+                                android:inputType="text|textMultiLine" />
+
+                            <TextView
+                                android:id="@+id/textView17"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Ressources et outils utilisés" />
+
+                            <EditText
+                                android:id="@+id/edit_text3"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:gravity="top"
+                                android:inputType="text|textMultiLine" />
+
+                            <TextView
+                                android:id="@+id/textView18"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Commentaires et appréciation générale" />
+
+                            <EditText
+                                android:id="@+id/edit_text4"
+                                android:layout_width="match_parent"
+                                android:layout_height="100dp"
+                                android:gravity="top"
+                                android:inputType="text|textMultiLine" />
+
+                            <TextView
+                                android:id="@+id/textView19"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Le tuteur souhaite-t-il faire partie du Jury de l'oral ?" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <RadioGroup
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/radioButton"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="OUI" />
+
+                                    <RadioButton
+                                        android:id="@+id/radioButton2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="NON" />
+                                </RadioGroup>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textView20"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Possibilité de prendre un stagiaire ?" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <CheckBox
+                                    android:id="@+id/checkBox"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="1ère année" />
+
+                                <CheckBox
+                                    android:id="@+id/checkBox2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="2ème année" />
+                            </LinearLayout>
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/button"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Annuler" />
+
+                                <Button
+                                    android:id="@+id/button2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Valider" />
                             </LinearLayout>
 
 
