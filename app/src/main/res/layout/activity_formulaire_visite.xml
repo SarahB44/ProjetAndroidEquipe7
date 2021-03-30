@@ -59,7 +59,8 @@
 
                             <TextView
                                 android:id="@+id/textView2"
-                                style="@style/EcritureParties"
+                                style="@style/EcritureTitres"
+                                android:paddingBottom="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -70,9 +71,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:paddingBottom="15dp"
                                 android:text="qssqdqsdsq"
                                 style="@style/EcritureParties"
+                                android:paddingBottom="15dp"
                                 />
 
                             <View
@@ -101,7 +102,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="ENSEIGNANT"
-                                style="@style/EcritureParties"
+                                style="@style/EcritureTitres"
+                                android:paddingBottom="5dp"
                                 />
 
                             <TextView
@@ -140,7 +142,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="ENTREPRISE"
-                                style="@style/EcritureParties"
+                                style="@style/EcritureTitres"
+                                android:paddingBottom="5dp"
                                 />
 
                             <TextView
@@ -180,7 +183,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:text="TUTEUR"
-                                style="@style/EcritureParties"
+                                style="@style/EcritureTitres"
+                                android:paddingBottom="5dp"
                                 />
 
                             <TextView
@@ -212,11 +216,13 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingBottom="15dp">
 
                             <TextView
                                 android:id="@+id/textView10"
-                                style="@style/EcritureParties"
+                                style="@style/EcritureTitres"
+                                android:paddingBottom="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -291,6 +297,16 @@
                                     android:inputType="textPersonName" />
                             </LinearLayout>
 
+                            <View
+                                android:id="@+id/divider5"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_weight="1"
+                                android:background="#EE9A49"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"/>
+
+
 
                         </LinearLayout>
 
@@ -301,14 +317,17 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingBottom="10dp">
 
                             <TextView
                                 android:id="@+id/textViewVisite"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="VISITE" />
+                                android:text="VISITE"
+                                style="@style/EcritureTitres"
+                                android:paddingBottom="5dp"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -321,7 +340,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Date : " />
+                                    android:text="Date : "
+                                    style="@style/EcritureParties" />
 
                                 <EditText
                                     android:id="@+id/editTextTextPersonName4"
@@ -329,27 +349,31 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:ems="10"
-                                    android:inputType="textPersonName" />
+                                    android:inputType="textPersonName"
+                                    style="@style/EcritureParties" />
                             </LinearLayout>
 
                             <TextView
                                 android:id="@+id/textView15"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Conditions du stage : " />
+                                android:text="Conditions du stage : "
+                                style="@style/EcritureParties" />
 
                             <EditText
                                 android:id="@+id/edit_text"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:gravity="top"
-                                android:inputType="text|textMultiLine" />
+                                android:inputType="text|textMultiLine"
+                                style="@style/EcritureParties" />
 
                             <TextView
                                 android:id="@+id/textView16"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Bilan des travaux réalisés" />
+                                android:text="Bilan des travaux réalisés"
+                                style="@style/EcritureParties" />
 
 
                             <EditText
@@ -357,39 +381,65 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:gravity="top"
-                                android:inputType="text|textMultiLine" />
+                                android:inputType="text|textMultiLine"
+                                style="@style/EcritureParties" />
 
                             <TextView
                                 android:id="@+id/textView17"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Ressources et outils utilisés" />
+                                android:text="Ressources et outils utilisés"
+                                style="@style/EcritureParties"/>
 
                             <EditText
                                 android:id="@+id/edit_text3"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:gravity="top"
-                                android:inputType="text|textMultiLine" />
+                                android:inputType="text|textMultiLine"
+                                style="@style/EcritureParties" />
 
                             <TextView
                                 android:id="@+id/textView18"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Commentaires et appréciation générale" />
+                                android:text="Commentaires et appréciation générale"
+                                style="@style/EcritureParties" />
 
                             <EditText
                                 android:id="@+id/edit_text4"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:gravity="top"
-                                android:inputType="text|textMultiLine" />
+                                android:inputType="text|textMultiLine"
+                                android:paddingBottom="15dp"
+                                style="@style/EcritureParties"/>
+
+                            <View
+                                android:id="@+id/divider6"
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:layout_weight="1"
+                                android:background="#EE9A49"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"/>
+
+                            <TextView
+                                android:id="@+id/textViewInfos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="INFORMATIONS SUPPLEMENTAIRES"
+                                style="@style/EcritureTitres"
+                                android:paddingTop="10dp"
+                                android:paddingBottom="10dp"/>
 
                             <TextView
                                 android:id="@+id/textView19"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Le tuteur souhaite-t-il faire partie du Jury de l'oral ?" />
+                                android:text="Le tuteur souhaite-t-il faire partie du Jury de l'oral ?"
+                                style="@style/EcritureParties" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -422,7 +472,8 @@
                                 android:id="@+id/textView20"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Possibilité de prendre un stagiaire ?" />
+                                android:text="Possibilité de prendre un stagiaire ?"
+                                style="@style/EcritureParties"/>
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -461,9 +512,14 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:inputType="textPersonName"
-                                    style="@style/EcritureParties"
-                                    />
+                                    android:text="Annuler" />
+
+                                <Button
+                                    android:id="@+id/button2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="Valider" />
                             </LinearLayout>
 
 

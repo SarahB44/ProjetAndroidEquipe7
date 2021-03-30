@@ -23,6 +23,13 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
+    <style name="EcritureTitres">
+        <item name="android:textColor">@color/colorTextTitres</item>
+        <item name="android:textSize">17dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
     <style name="Titre">
         <item name="android:textColor">@color/colorOrange</item>
         <item name="android:textAlignment">center</item>
