@@ -29,8 +29,8 @@ public class FormulaireVisiteStageActivity extends Activity {
         if (intent != null) {
             etudiant = intent.getStringExtra("EXTRA_ETUDIANT");
 
-            TextView textEtudiant = findViewById(R.id.textView3);
-            textEtudiant.setText(etudiant);
+            //TextView textEtudiant = findViewById(R.id.textView3);
+            //textEtudiant.setText(etudiant);
 
 
         }
