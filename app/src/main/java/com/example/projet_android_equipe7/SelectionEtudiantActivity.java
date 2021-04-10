@@ -21,6 +21,8 @@ import com.example.projet_android_equipe7.modele.dao.MaRequestEleve;
 import com.example.projet_android_equipe7.modele.dao.Requestconnexion;
 import com.example.projet_android_equipe7.modele.metier.Eleve;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class SelectionEtudiantActivity extends Activity {
@@ -28,6 +30,8 @@ public class SelectionEtudiantActivity extends Activity {
     private RequestQueue queue;
     private Requestconnexion request;
     private Handler handler;
+
+    ArrayList<String> lesetudiants = new ArrayList<String>();
 
     final Context context = this;
     @Override
@@ -43,9 +47,9 @@ public class SelectionEtudiantActivity extends Activity {
             public void onClick(View v) {
 
                         //on passer les infos dans l'autre interface
-                        String etudiant = lEtudiant[0];
+
                             Intent i = new Intent(SelectionEtudiantActivity.this, FormulaireVisiteStageActivity.class);
-                            Toast.makeText(getApplicationContext(), etudiant, Toast.LENGTH_LONG).show();
+
                             i.putExtra("EXTRA_ETUDIANT", lEtudiant[0]);
                             startActivityForResult(i, 0);
                 }
@@ -72,6 +76,34 @@ public class SelectionEtudiantActivity extends Activity {
             @Override
             public void onSuccess(ArrayList<Eleve> eleves) {
                 Log.d("test recuperation eleves",eleves.toString());
+                for(int i=0; i<eleves.size();i++){
+                    Eleve eleve = eleves.get(i);
+                    lesetudiants.add(eleve.getNom() + " " + eleve.getPrenom());
+
+                }
+                SelectionEtudiantActivity.this.runOnUiThread(new Runnable(){
+                    @Override
+                    public void run(){
+
+                            ArrayAdapter<String> dataAdapterR = new ArrayAdapter<String>(SelectionEtudiantActivity.this, android.R.layout.simple_spinner_item, lesetudiants);
+                            dataAdapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            spinnerListeEtudiant.setAdapter(dataAdapterR);
+                            spinnerListeEtudiant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    lEtudiant[0] = String.valueOf(spinnerListeEtudiant.getSelectedItem());
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                }
+                            });
+
+
+
+                        }
+                    });
+
             }
 
             @Override
@@ -88,25 +120,9 @@ public class SelectionEtudiantActivity extends Activity {
 
 
         //TEMPORAIRE AVANT LA GESTION DE LA BDD
-        ArrayList<String> lesetudiants = new ArrayList<String>();
 
-        lesetudiants.add("BOSSIERE ALEXIA");
-        lesetudiants.add("LELONG LUCAS");
-        lesetudiants.add("BRAILLON SARAH");
-        lesetudiants.add("CREPILLIERE AXEL");
 
-        ArrayAdapter<String> dataAdapterR = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lesetudiants);
-        dataAdapterR.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerListeEtudiant.setAdapter(dataAdapterR);
-        spinnerListeEtudiant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                lEtudiant[0] = String.valueOf(spinnerListeEtudiant.getSelectedItem());
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
     }
 }

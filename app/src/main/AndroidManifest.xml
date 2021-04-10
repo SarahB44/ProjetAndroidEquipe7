@@ -31,6 +31,9 @@
         <activity
             android:name=".FormulaireVisiteStageActivity">
         </activity>
+        <activity
+            android:name=".ValidationFormulaireVisiteStageActivity">
+        </activity>
     </application>
 
 
