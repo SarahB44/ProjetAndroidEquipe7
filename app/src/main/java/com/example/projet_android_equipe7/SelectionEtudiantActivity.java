@@ -23,15 +23,18 @@ import com.example.projet_android_equipe7.modele.metier.Eleve;
 
 import org.json.JSONException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SelectionEtudiantActivity extends Activity {
     final String[] lEtudiant= new String[1];
+    private String idEleve;
     private RequestQueue queue;
     private Requestconnexion request;
     private Handler handler;
 
     ArrayList<String> lesetudiants = new ArrayList<String>();
+    ArrayList<String> idEtudiant = new ArrayList<String>();
 
     final Context context = this;
     @Override
@@ -45,12 +48,11 @@ public class SelectionEtudiantActivity extends Activity {
             //on implémente la méthode onclick
             @Override
             public void onClick(View v) {
-
                         //on passer les infos dans l'autre interface
-
                             Intent i = new Intent(SelectionEtudiantActivity.this, FormulaireVisiteStageActivity.class);
 
                             i.putExtra("EXTRA_ETUDIANT", lEtudiant[0]);
+                            i.putExtra("EXTRA_ID_ETUDIANT", idEleve);
                             startActivityForResult(i, 0);
                 }
 
@@ -62,6 +64,8 @@ public class SelectionEtudiantActivity extends Activity {
 
         //gestion de la liste déroulante des Etudiants
         final Spinner spinnerListeEtudiant = (Spinner) findViewById(R.id.spinnerEtudiant);
+
+
         /*
         GESTION DE LA BDD
         */
@@ -79,7 +83,7 @@ public class SelectionEtudiantActivity extends Activity {
                 for(int i=0; i<eleves.size();i++){
                     Eleve eleve = eleves.get(i);
                     lesetudiants.add(eleve.getNom() + " " + eleve.getPrenom());
-
+                    idEtudiant.add(eleve.getIdEleve());
                 }
                 SelectionEtudiantActivity.this.runOnUiThread(new Runnable(){
                     @Override
@@ -91,6 +95,7 @@ public class SelectionEtudiantActivity extends Activity {
                             spinnerListeEtudiant.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     lEtudiant[0] = String.valueOf(spinnerListeEtudiant.getSelectedItem());
+                                    idEleve = String.valueOf(idEtudiant.get(position));
                                 }
 
                                 @Override

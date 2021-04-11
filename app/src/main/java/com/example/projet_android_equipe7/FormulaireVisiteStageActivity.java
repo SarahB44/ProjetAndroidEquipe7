@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +17,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.app.Activity;
 import android.widget.Toast;
+
+import com.android.volley.RequestQueue;
+import com.example.projet_android_equipe7.modele.dao.MaRequestStage;
+import com.example.projet_android_equipe7.modele.dao.Requestconnexion;
+import com.example.projet_android_equipe7.modele.metier.Stage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +34,10 @@ import java.util.Locale;
 public class FormulaireVisiteStageActivity extends Activity {
 
     final Context context = this;
+    private RequestQueue queue;
+    private Requestconnexion request;
+    private Handler handler;
+
     final String[] jury= new String[1];
     final String[] checkbox =new String[2];
     @Override
@@ -40,12 +51,59 @@ public class FormulaireVisiteStageActivity extends Activity {
 
 
 
-        String etudiant = "";
-        Intent intent = getIntent();
+        String etudiant = "TEST"; //instanciation du nom de l'etudiant avec la valeur TEST
+        String id = "";
+        Intent intent = getIntent(); //recupere les valeurs de l'intent
 
+        //si l'intent n'est pas vide
         if (intent != null) {
-            etudiant = intent.getStringExtra("EXTRA_ETUDIANT");
+            id = intent.getStringExtra("EXTRA_ID_ETUDIANT");
+            etudiant = intent.getStringExtra("EXTRA_ETUDIANT"); //recupere les valeurs de l'etudiants
+        } else {
+            finish(); //termine l'activité
         }
+
+        /* BDD */
+
+        //gere le singleton
+        queue = VolleySingleton.getInstance(this).getRequestQueue();
+
+        MaRequestStage requestStage = new MaRequestStage(context,queue);
+        requestStage.getStage(id, new MaRequestStage.getStageCallBack() {
+            @Override
+            public void onSuccess(Stage unStage) {
+                //Toast.makeText(context,"Réussite : "+unStage.toString(),Toast.LENGTH_LONG).show();
+
+                TextView textEnseignant = findViewById(R.id.textView5);
+               textEnseignant.setText(String.valueOf(unStage.getEnseignant().getPrenom()+" " +unStage.getEnseignant().getNom()));
+
+               TextView textEntreprise = findViewById(R.id.textView7);
+               textEntreprise.setText(String.valueOf(unStage.getEntreprise().getNom()));
+
+               TextView textTuteur = findViewById(R.id.textView9);
+               textTuteur.setText(String.valueOf(unStage.getTuteur().getNom()));
+
+               EditText editTextTextPersonName = findViewById(R.id.editTextTextPersonName);
+               editTextTextPersonName.setText(unStage.getIntitule());
+
+               EditText dateDebut = findViewById(R.id.dateDebut);
+                dateDebut.setText(unStage.getDateDebut());
+
+                EditText datefin = findViewById(R.id.dateFin);
+                datefin.setText(unStage.getDateFin());
+
+            }
+
+            @Override
+            public void onError(String message) {
+                Log.d("message d'erreur",message);
+            }
+        });
+
+
+        /* FIN DE BDD */
+
+
 
         TextView textEleve = findViewById(R.id.textView3);
         textEleve.setText(etudiant);
@@ -97,7 +155,7 @@ public class FormulaireVisiteStageActivity extends Activity {
 
 
                             }catch (JSONException e) {
-
+                                Log.d("test",e.toString());
                             }
                            String  stringJson = json.toString();
                         i.putExtra("EXTRA_JSON", stringJson);
@@ -258,6 +316,4 @@ public class FormulaireVisiteStageActivity extends Activity {
 
 
     }
-
-
 }

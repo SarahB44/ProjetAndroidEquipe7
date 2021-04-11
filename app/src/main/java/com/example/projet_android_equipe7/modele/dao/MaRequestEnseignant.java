@@ -56,7 +56,7 @@ public class MaRequestEnseignant {
                             callback.onError(json.getString("message"));
                         }
                     } catch (JSONException e) {
-                        callback.onError(response.toString());
+                        callback.onError(response.toString() +" "+ e.toString());
                     }
                 }
             }, new Response.ErrorListener() {
