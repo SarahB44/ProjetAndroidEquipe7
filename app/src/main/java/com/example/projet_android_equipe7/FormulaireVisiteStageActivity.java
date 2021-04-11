@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.app.Activity;
 import android.widget.Toast;
@@ -25,7 +27,8 @@ import java.util.Locale;
 public class FormulaireVisiteStageActivity extends Activity {
 
     final Context context = this;
-
+    final String[] jury= new String[1];
+    final String[] checkbox =new String[2];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,16 +40,33 @@ public class FormulaireVisiteStageActivity extends Activity {
 
 
 
-        String etudiant = "TEST";
+        String etudiant = "";
         Intent intent = getIntent();
 
         if (intent != null) {
             etudiant = intent.getStringExtra("EXTRA_ETUDIANT");
         }
 
-        Toast.makeText(getApplicationContext(), "prout" + etudiant, Toast.LENGTH_LONG).show();
         TextView textEleve = findViewById(R.id.textView3);
         textEleve.setText(etudiant);
+        final String eleve = textEleve.getText().toString();
+
+        final TextView textEnseignant = findViewById(R.id.textView5);
+
+        final TextView textEntreprise = findViewById(R.id.textView7);
+
+        final TextView textTuteur = findViewById(R.id.textView9);
+
+        final EditText intituleStage = findViewById(R.id.editTextTextPersonName);
+        final EditText condition = findViewById(R.id.edit_text);
+        final EditText bilan = findViewById(R.id.edit_text2);
+        final EditText ressource = findViewById(R.id.edit_text3);
+        final EditText commentaire = findViewById(R.id.edit_text4);
+
+        final EditText edittextDebut = findViewById(R.id.dateDebut);
+        final EditText edittextFin = findViewById(R.id.dateFin);
+        final EditText edittextVisite = findViewById(R.id.dateVisite);
+
 
         //on place un écouteur dessus:
         View.OnClickListener ecouteur1 = new View.OnClickListener() {
@@ -61,20 +81,19 @@ public class FormulaireVisiteStageActivity extends Activity {
                             JSONObject json = new JSONObject();
 
                             try {
-                                json.put("ELEVE", "lucas");
-                                json.put("ENSEIGNANT", "alexia");
-                                json.put("ENTREPRISE", "ECIBAT");
-                                json.put("TUTEUR", "sarah");
-                                json.put("INTITULE STAGE", "stage");
-                                json.put("Date debut", "20/23/26");
-                                json.put("Date fin", "22/22/22");
-                                json.put("DATE Visite", "22/5/55");
-                                json.put("CONDITION", "ceci sont les conditions");
-                                json.put("BILAN", "Ceci est le bilan");
-                                json.put("RESSOURCE", "ressourcessss");
-                                json.put("COMMENTAIRE", "commentaire");
-                                json.put("tuteur oral", "true");
-                                json.put("prendre un stagiaire ?", "1ere annéee 2 eme année");
+                                json.put("ELEVE", eleve);
+                                json.put("ENSEIGNANT", textEnseignant.getText().toString());
+                                json.put("ENTREPRISE", textEntreprise.getText().toString());
+                                json.put("TUTEUR", textTuteur.getText().toString());
+                                json.put("INTITULE STAGE", intituleStage.getText().toString());
+                                json.put("Date debut", edittextDebut.getText().toString());
+                                json.put("Date fin", edittextFin.getText().toString());
+                                json.put("DATE Visite", edittextVisite.getText().toString());
+                                json.put("CONDITION", condition.getText().toString());
+                                json.put("BILAN", bilan.getText().toString());
+                                json.put("COMMENTAIRE", commentaire.getText().toString());
+                                json.put("tuteur oral", jury[0]);
+                                json.put("prendre un stagiaire ?", checkbox[0] + checkbox[1]);
 
 
                             }catch (JSONException e) {
@@ -102,13 +121,59 @@ public class FormulaireVisiteStageActivity extends Activity {
         buttonValider.setOnClickListener(ecouteur1);
         buttonAnnuler.setOnClickListener(ecouteur1);
 
+//programmatin des checkbox
+        CheckBox chk = (CheckBox) findViewById(R.id.checkBox);
+        CheckBox chk2 = (CheckBox) findViewById(R.id.checkBox2);
+        checkbox[0] = "";
+        chk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                // Check which checkbox was clicked
+                if (checked){
+                    checkbox[0] += " 1ère année";
+                }
+                else{
+                    checkbox[0] = "";
+                }
+
+            }
+        });
+        chk2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((CheckBox) v).isChecked();
+                // Check which checkbox was clicked
+                if (checked){
+                    checkbox[1] += " 2ème année";
+                }
+                else{
+                    checkbox[1] = "";
+                }
+
+            }
+        });
+
+        //programmation des boutons radios
+        RadioGroup radioGroupStage = findViewById(R.id.radioGroupStage);
+        radioGroupStage.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged (RadioGroup radioGroupStage,int i){
+                switch (i) {
+                    case R.id.radioButton:
+                        jury[0] ="OUI";
+                        break;
+                    case R.id.radioButton2:
+                        jury[0] ="NON";
+                        break;
+
+                }
+            }
+
+        });
 
         final Calendar myCalendarDebut = Calendar.getInstance();
         final Calendar myCalendarFin = Calendar.getInstance();
         final Calendar myCalendarVisite = Calendar.getInstance();
-        final EditText edittextDebut = findViewById(R.id.dateDebut);
-        final EditText edittextFin = findViewById(R.id.dateFin);
-        final EditText edittextVisite = findViewById(R.id.dateVisite);
 
         edittextFin.requestFocus();
         edittextVisite.requestFocus();
@@ -193,4 +258,6 @@ public class FormulaireVisiteStageActivity extends Activity {
 
 
     }
+
+
 }
