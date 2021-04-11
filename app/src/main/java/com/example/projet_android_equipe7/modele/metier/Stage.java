@@ -15,7 +15,7 @@ public class Stage {
     private Tuteur tuteur;
     private Visite visite;
 
-    public Stage(String idStage, String intitule, String dateDebut, String dateFin, Eleve eleve, Enseignant enseignant, Entreprise entreprise, Tuteur tuteur, Visite visite) {
+    public Stage(String idStage, String intitule, String dateDebut, String dateFin, Eleve eleve, Enseignant enseignant, Entreprise entreprise, Tuteur tuteur) {
         this.idStage = idStage;
         this.intitule = intitule;
         this.dateDebut = dateDebut;
@@ -24,7 +24,6 @@ public class Stage {
         this.enseignant = enseignant;
         this.entreprise = entreprise;
         this.tuteur = tuteur;
-        this.visite = visite;
     }
 
     public String getIdStage() {
@@ -59,10 +58,6 @@ public class Stage {
         return tuteur;
     }
 
-    public Visite getVisite() {
-        return visite;
-    }
-
     @Override
     public String toString() {
         return "Stage{" +
@@ -70,11 +65,7 @@ public class Stage {
                 ", intitule='" + intitule + '\'' +
                 ", dateDebut='" + dateDebut + '\'' +
                 ", dateFin='" + dateFin + '\'' +
-                ", eleve=" + eleve.toString() +
-                ", enseignant=" + enseignant.toString() +
-                ", entreprise=" + entreprise.toString() +
-                ", tuteur=" + tuteur.toString() +
-                ", visite=" + visite.toString() +
+                ", eleve="+this.eleve.toString() + '\'' +
                 '}';
     }
 }

@@ -57,21 +57,6 @@ public class LoginActivity extends AppCompatActivity {
         handler = new Handler();
 
 
-        MaRequestTuteur test = new MaRequestTuteur(this,queue);
-        MaRequestTuteur.getTuteur("1",new MaRequestTuteur.getTuteurCallBack() {
-
-            @Override
-            public void onSuccess(Tuteur nouveauTuteur) {
-                Toast.makeText(getBaseContext(),nouveauTuteur.toString(),Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onError(String message) {
-                Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
-            }
-        });
-
-
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -118,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                     @Override
                                     public void onError(String message) {
-                                        Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(getBaseContext(),message,Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -174,7 +159,7 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUiWithUser(LoggedInUserView model) {
         //String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
-        //Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        //².makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

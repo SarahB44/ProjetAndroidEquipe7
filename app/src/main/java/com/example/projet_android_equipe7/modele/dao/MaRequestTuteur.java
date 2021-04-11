@@ -54,20 +54,8 @@ public class MaRequestTuteur {
                         final String email = json.getString("EMAIL");
                         final String numerotelephone = json.getString("NUMEROTELEPHONE");
 
-                        MaRequestEntreprise request = new MaRequestEntreprise(context,queue);
-                        request.getEntreprise(idEntreprise,new MaRequestEntreprise.getEntrepriseCallBack() {
-                            @Override
-                            public void onSuccess(Entreprise nouvelEntreprise) {
-                                //assigne l'entreprise au tuteur
-                                Tuteur nouveauTuteur = new Tuteur(id,nom,prenom,email,numerotelephone,nouvelEntreprise);
-                                callback.onSuccess(nouveauTuteur);
-                            }
-
-                            @Override
-                            public void onError(String message) {
-                                callback.onError(message);
-                            }
-                        });
+                        Tuteur nouveauTuteur = new Tuteur(id,nom,prenom,email,numerotelephone);
+                        callback.onSuccess(nouveauTuteur);
                     } else {
                         callback.onError(json.getString("message"));
                     }
